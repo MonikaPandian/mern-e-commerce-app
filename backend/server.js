@@ -4,10 +4,12 @@ const connectDB = require('./config/config');
 const productRoutes = require('./routes/productsRoute');
 const { errorHandler } = require('./middlewares/errorMiddleware');
 const userRoutes = require('./routes/usersRoute');
+const orderRoutes = require('./routes/orderRoute');
 
 //dotenv config
 dotenv.config();
 
+//connecting to mongodb database
 connectDB();
 const app = express();
 
@@ -20,6 +22,7 @@ app.get('/', (req, res) => {
 
 app.use('/api', productRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/orders', orderRoutes);
 
 app.use(errorHandler);
 

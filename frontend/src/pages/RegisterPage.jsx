@@ -44,25 +44,25 @@ const RegisterPage = () => {
                 {loading && <Loader />}
                 {message ? <Message variant="danger">{message}</Message> : ""}
                 <Form onSubmit={submitHandler}>
-                    <Form.Group controlId="name">
+                    <Form.Group controlId="name" className='mt-3'>
                         <Form.Label>Name</Form.Label>
                         <Form.Control type="text" placeholder="Enter name" value={name} onChange={(e) => setName(e.target.value)}></Form.Control>
                     </Form.Group>
-                    <Form.Group controlId="email">
+                    <Form.Group controlId="email" className='mt-3'>
                         <Form.Label>Email Address</Form.Label>
                         <Form.Control type="email" placeholder="Enter email" value={email} onChange={(e) => setEmail(e.target.value)}></Form.Control>
                     </Form.Group>
-                    <Form.Group controlId="password">
+                    <Form.Group controlId="password" className='mt-3'>
                         <Form.Label>Password</Form.Label>
                         <Form.Control type="password" placeholder="Enter password" value={password} onChange={(e) => setPassword(e.target.value)}></Form.Control>
                     </Form.Group>
-                    <Form.Group controlId="confirmPassword">
+                    <Form.Group controlId="confirmPassword" className='mt-3'>
                         <Form.Label>Confirm Password</Form.Label>
                         <Form.Control type="password" placeholder="Re-enter password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}></Form.Control>
                     </Form.Group>
-                    <Button type="submit" variant="primary">REGISTER</Button>
+                    <Button type="submit" variant="primary" className='mt-3'>REGISTER</Button>
                 </Form>
-                <Row>
+                <Row className='mt-3'>
                     <Col>
                         Have an account ?
                         <Link to="/login">Login</Link>

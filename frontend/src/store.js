@@ -4,6 +4,7 @@ import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { userLoginReducer, userRegisterReducer, userDetailsReducer, userUpdateDetailsReducer } from "./reducers/userReducers";
+import { orderCreateReducer } from "./reducers/orderReducer";
 
 const shippingAddressFromStorage = localStorage.getItem('shippingAddress') ? JSON.parse(localStorage.getItem('shippingAddress')) : {}
 
@@ -19,6 +20,7 @@ const reducer = combineReducers({
     userRegister: userRegisterReducer,
     userDetails: userDetailsReducer,
     userUpdateProfile: userUpdateDetailsReducer,
+    orderCreate: orderCreateReducer,
 });
 
 const initialState = {
