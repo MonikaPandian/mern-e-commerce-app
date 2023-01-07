@@ -68,7 +68,8 @@ const ProductDetailsPage = () => {
                                     )
                                 }
                                 <ListGroupItem>
-                                    <Button className="btn" type="button" onClick={addToCartHandler}>Add to cart</Button>
+                                    <Button className="btn" type="button"
+                                        disabled={product.countInStock === 0} onClick={addToCartHandler}>Add to cart</Button>
                                 </ListGroupItem>
                             </ListGroup>
                         </Col>

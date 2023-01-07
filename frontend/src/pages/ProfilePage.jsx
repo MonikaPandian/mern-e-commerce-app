@@ -1,11 +1,14 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Row, Col, Button, Form } from "react-bootstrap";
+import { Row, Col, Button, Form, Alert, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from '../components/shared/Loader';
 import Message from '../components/shared/Message';
-import { updateUserProfile } from "../actions/userActions";
+import { getUserDetails, updateUserProfile } from "../actions/userActions";
 import { useState } from 'react';
+import { listMyOrders } from "../actions/orderActions"
+import { ORDER_CREATE_REQUEST } from '../constants/orderConstants';
+import { LinkContainer } from "react-router-bootstrap";
 
 const ProfilePage = () => {
     const [name, setName] = useState("");
@@ -24,11 +27,16 @@ const ProfilePage = () => {
     const userUpdateProfile = useSelector((state) => state.userUpdateProfile)
     const { success } = userUpdateProfile
 
+    const orderList = useSelector((state) => state.orderList)
+    const { loading: loadingOrders, orders, error: errorOrders } = orderList
+
     useEffect(() => {
         if (!userInfo) {
             navigate('/login')
+        } else if (!user.name) {
+            dispatch(getUserDetails('profile'));
+            dispatch(listMyOrders());
         } else {
-
             setName(userInfo.name)
             setEmail(userInfo.email)
 
@@ -75,9 +83,43 @@ const ProfilePage = () => {
                         <Button type="submit" variant="primary" className='mt-3'>UPDATE</Button>
                     </Form>
                 </Col>
-                <Col md={9}>
-                    <h1>MY ORDERS</h1>
-
+                <Col md={9} >
+                    <h1 className='d-flex justify-content-center'>MY ORDERS</h1>
+                    {
+                        loadingOrders ? <Loader /> : errorOrders ? <Alert variant="danger">{errorOrders}</Alert> : (
+                            <Table striped bordered hover responsive className="table-sm text-center">
+                                <thead>
+                                    <tr>
+                                        <td>ID</td>
+                                        <td>DATE</td>
+                                        <td>TOTAL</td>
+                                        <td>PAID</td>
+                                        <td>DELIEVERED</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {
+                                        orders.map((order) => (
+                                            <tr key={order._id}>
+                                                <td>{order._id}</td>
+                                                <td>{order.createdAt.substring(0, 10)}</td>
+                                                <td>{order.totalPrice}</td>
+                                                <td>{order.isPaid ? order.paidAt.substring(0, 10) : (
+                                                    <i className='fas fa-times' style={{ color: 'red' }}></i>)}</td>
+                                                <td>{order.isDelivered ? order.deliveredAt.substring(0, 10) : (
+                                                    <p style={{ color: "red" }}>Not Delievered</p>)}</td>
+                                                <td>
+                                                    <LinkContainer to={`/order/${order._id}`}>
+                                                        <Button variant="light">Details</Button>
+                                                    </LinkContainer>
+                                                </td>
+                                            </tr>
+                                        ))
+                                    }
+                                </tbody>
+                            </Table>
+                        )
+                    }
                 </Col>
             </Row>
         </>

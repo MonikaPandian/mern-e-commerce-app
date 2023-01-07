@@ -56,6 +56,9 @@ const productSchema = mongoose.Schema({
     countInStock: {
         type: Number,
         required: true,
+    },
+    display: {
+        type: String,
     }
 });
 

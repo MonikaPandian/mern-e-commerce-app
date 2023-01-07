@@ -26,7 +26,10 @@ const Header = () => {
                             className="ms-auto"
                             style={{ maxHeight: '150px' }}
                             navbarScroll
-                        >
+                        > <LinkContainer to="/">
+                                <Nav.Link>
+                                    <i className="fa-solid fa-house"></i>&nbsp;&nbsp;HOME</Nav.Link>
+                            </LinkContainer>
                             <LinkContainer to="/cart">
                                 <Nav.Link>
                                     <i className="fa-solid fa-cart-shopping"></i>&nbsp;&nbsp;CART</Nav.Link>

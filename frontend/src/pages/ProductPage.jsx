@@ -7,7 +7,7 @@ const ProductPage = ({ product }) => {
 
     return (
         <>
-            <Card className="my-3 p-3 rounded" style={{ height: "30rem", width: "19rem" }}>
+            <Card className="my-3 p-1 rounded" style={{ height: "30rem", width: "19rem" }}>
                 <Link to={`/product/${product._id}`}>
                     <Card.Img src={product.image} variant="top" />
                 </Link>

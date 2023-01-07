@@ -19,6 +19,8 @@ const CartPage = () => {
         navigate('/shipping');
     }
 
+    let cartItemsNumber = cartItems.reduce((acc, item) => acc + Number(item.qty), 0)
+
     return (
         <>
             <Row>
@@ -66,14 +68,13 @@ const CartPage = () => {
                         </ListGroup>
                         )}
                 </Col>
-                <Col md={4}>
+                <Col md={4} className="mt-5">
                     <Card>
                         <ListGroup variant="flush">
                             <ListGroupItem>
-                                <h2>subtotal ({cartItems.reduce((acc, item) => acc + Number(item.qty), 0)}) items</h2>
-                                <p style={{ fontSize: "20px" }}>${cartItems.reduce((acc, item) => acc + Number(item.qty) * Number(item.price), 0).toFixed(2)}</p>
+                                <h2>subtotal ${cartItems.reduce((acc, item) => acc + Number(item.qty) * Number(item.price), 0).toFixed(2)}</h2>
                             </ListGroupItem>
-                            <Button type="button" className='btn-block' disabled={cartItems.length === 0} onClick={checkOut}>Proceed to checkout</Button>
+                            <Button type="button" className='btn-block btn-large' disabled={cartItems.length === 0} onClick={checkOut}>PROCEED TO BUY ({cartItemsNumber} {cartItemsNumber > 1 ? 'items' : 'item'})</Button>
                         </ListGroup>
                     </Card>
                 </Col>
