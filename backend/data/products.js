@@ -98,7 +98,7 @@ const products = [
         brand: 'Lenovo',
         category: 'Electronics',
         price: 29.99,
-        countInStock: 0,
+        countInStock: 10,
         rating: 4,
         numReviews: 12,
         display: 'home'
@@ -111,7 +111,7 @@ const products = [
         brand: 'Kuber Industries',
         category: 'Home & Kitchen',
         price: 29.99,
-        countInStock: 0,
+        countInStock: 12,
         rating: 4,
         numReviews: 12,
         display: 'home'

@@ -51,7 +51,7 @@ export const logout = () => async (dispatch) => {
     dispatch({ type: ORDER_LIST_RESET });
 }
 
-export const getUserDetails = (id) => async (dispatch, getState) => {
+export const getUserDetails = () => async (dispatch, getState) => {
     try {
         dispatch({
             type: USER_DETAILS_REQUEST,
@@ -63,10 +63,6 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
             type: USER_DETAILS_SUCCESS,
             payload: data
         })
-        dispatch({
-            type: USER_LOGIN_SUCCESS,
-            payload: data,
-        });
     } catch (error) {
         dispatch({
             type: USER_DETAILS_FAIL,

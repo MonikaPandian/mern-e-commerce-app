@@ -60,7 +60,7 @@ const HomePage = () => {
                 <h2 className="mt-4">PRODUCTS</h2>
                 <Row style={{ caretColor: "transparent" }}>
                     {generalProducts.map((product) => (
-                        <Col key={product._id} xxl={3} xl={4} md={4} sm={12} className="mb-2">
+                        <Col key={product._id} xxl={3} xl={4} md={6} sm={12} className="mb-2">
                             <ProductPage product={product} />
                         </Col>
                     ))}

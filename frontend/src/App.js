@@ -16,6 +16,8 @@ import OrderPage from './pages/OrderPage';
 import HomeEssentialProducts from './pages/HomeEssentialProducts';
 import BeautyProducts from './pages/BeautyProducts';
 import HeadphoneProducts from './pages/HeadphoneProducts';
+import MyOrdersPage from './pages/MyOrdersPage';
+import Wishlist from './pages/Wishlist';
 
 function App() {
   return (
@@ -36,7 +38,9 @@ function App() {
             <Route path="/headphones" element={<HeadphoneProducts />} />
             <Route path="/cart" element={<CartPage />} />
             <Route path="/payment" element={<PaymentPage />} />
+            <Route path="/wishlist" element={<Wishlist />} />
             <Route path="/order/:orderId" element={<OrderPage />} />
+            <Route path="/my-orders" element={<MyOrdersPage />} />
           </Routes>
         </Container>
       </main>

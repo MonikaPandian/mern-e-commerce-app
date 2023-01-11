@@ -41,6 +41,16 @@ const Header = () => {
                                             Profile
                                         </NavDropdown.Item>
                                     </LinkContainer>
+                                    <LinkContainer to='/my-orders'>
+                                        <NavDropdown.Item>
+                                            My Orders
+                                        </NavDropdown.Item>
+                                    </LinkContainer>
+                                    <LinkContainer to='/wishlist'>
+                                        <NavDropdown.Item>
+                                            Wishlist
+                                        </NavDropdown.Item>
+                                    </LinkContainer>
                                     <NavDropdown.Item onClick={logoutHandler}>
                                         Logout
                                     </NavDropdown.Item>

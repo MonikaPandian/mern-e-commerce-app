@@ -1,35 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { Row, Col, ListGroup, Button, Image, ListGroupItem, Form, Card, Alert } from "react-bootstrap";
-import { addToCart, removeFromCart } from '../actions/cartActions';
+import { Row, Col, ListGroup, Button, Image, ListGroupItem, Form, Alert } from "react-bootstrap";
+import { addToCart, removeFromWishlist } from '../actions/cartActions';
 import { Link, useNavigate } from 'react-router-dom';
 
-const CartPage = () => {
+const Wishlist = () => {
     const dispatch = useDispatch();
     const cart = useSelector((state) => state.cart)
-    const { cartItems } = cart;
+    const { wishlist } = cart;
     const navigate = useNavigate();
+    const [qty, setQty] = useState(1);
 
-    const removeFromCartHandler = (id) => {
-        dispatch(removeFromCart(id))
+    const addToCartHandler = (id) => {
+        dispatch(addToCart(id, qty));
+        navigate("/cart");
     }
 
-    const checkOut = () => {
-        navigate('/shipping');
+    const removeFromWishlistHandler = (id) => {
+        dispatch(removeFromWishlist(id))
     }
-
-    let cartItemsNumber = cartItems.reduce((acc, item) => acc + Number(item.qty), 0)
 
     return (
         <>
-            <Row>
+            <Row className='d-flex'>
                 <Col md={8}>
-                    <h3>Shopping cart</h3>
+                    <h3>Wishlist</h3>
                     {
-                        cartItems.length === 0 ? (
-                            <Alert>Your cart is empty !! <Link to="/">start shopping</Link></Alert>
+                        wishlist.length === 0 ? (
+                            <Alert>Your wishlist is empty !! <Link to="/">start shopping</Link></Alert>
                         ) : (<ListGroup variant="flush">
-                            {cartItems.map((item) => (
+                            {wishlist.map((item) => (
                                 <ListGroupItem key={item.productId}>
                                     <Row>
                                         <Col md={2}>
@@ -41,8 +41,8 @@ const CartPage = () => {
                                         <Col md={2}>${item.price}</Col>
                                         <Col md={2}>
                                             <Form.Select
-                                                value={item.qty}
-                                                onChange={(e) => dispatch(addToCart(item.productId, Number(e.target.value)))}
+                                                value={qty}
+                                                onChange={(e) => setQty(e.target.value)}
                                             >
                                                 {[...Array(item.countInStock).keys()].map((x) => (
                                                     <option key={x + 1} value={x + 1}>
@@ -50,10 +50,19 @@ const CartPage = () => {
                                                     </option>
                                                 ))}
                                             </Form.Select>
+                                        </Col>
+                                        <Col md={3}>
+                                            <Button
+                                                type="button"
+                                                variant="primary" className='mt-2'
+                                                onClick={() => addToCartHandler(item.productId, qty)}
+                                            >
+                                                Move to Cart
+                                            </Button>
                                             <Button
                                                 type="button"
                                                 variant="light" className='mt-2'
-                                                onClick={() => removeFromCartHandler(item.productId)}
+                                                onClick={() => removeFromWishlistHandler(item.productId)}
                                             >
                                                 <i
                                                     className="fa fa-trash text-danger"
@@ -67,20 +76,10 @@ const CartPage = () => {
                         </ListGroup>
                         )}
                 </Col>
-                <Col md={4} className="mt-5">
-                    <Card>
-                        <ListGroup>
-                            <ListGroupItem>
-                                <h2>Subtotal ${cartItems.reduce((acc, item) => acc + Number(item.qty) * Number(item.price), 0).toFixed(2)}</h2>
-                            </ListGroupItem>
-                            <Button type="button" className='btn-block btn-large' disabled={cartItems.length === 0} onClick={checkOut}>PROCEED TO BUY ({cartItemsNumber} {cartItemsNumber > 1 ? 'items' : 'item'})</Button>
-                        </ListGroup>
-                    </Card>
-                </Col>
+
             </Row>
         </>
     )
 }
 
-export default CartPage
-
+export default Wishlist

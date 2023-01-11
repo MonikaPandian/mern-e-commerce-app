@@ -1,10 +1,9 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
-import { Alert, Button, Card, Col, Form, Image, ListGroup, Row } from 'react-bootstrap';
+import { Alert, Button, Card, Col, Image, ListGroup, Row } from 'react-bootstrap';
 import { ORDER_PAY_RESET } from "../constants/orderConstants";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Loader from "../components/shared/Loader";
 import { getOrderDetails, payOrder } from '../actions/orderActions';
 import Message from '../components/shared/Message';
@@ -20,6 +19,7 @@ const OrderPage = () => {
     const { loading: loadingPay, success: successPay } = orderPay
     const orderDetails = useSelector((state) => state.orderDetails)
     const { order, loading, error } = orderDetails
+    const navigate = useNavigate();
 
     if (!loading) {
         //calculate price
@@ -34,8 +34,12 @@ const OrderPage = () => {
     }
 
     useEffect(() => {
+        dispatch(getOrderDetails(orderId));
+    }, [dispatch, orderId])
+
+    useEffect(() => {
         const addPayPalScript = async () => {
-            const { data: clientId } = await axios.get('/api/config/paypal')
+            const { data: clientId } = await axios.get('/api/config/paypal');
             const script = document.createElement('script')
             script.type = 'text/javascript'
             script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}`
@@ -49,7 +53,8 @@ const OrderPage = () => {
         if (!order || successPay) {
             dispatch(getOrderDetails(orderId));
             dispatch({ type: ORDER_PAY_RESET });
-        } else if (!order.isPaid) {
+        }
+        else if (!order.isPaid) {
             if (!window.paypal) {
                 addPayPalScript()
             } else {
@@ -146,6 +151,9 @@ const OrderPage = () => {
                                 <PayPalButton amount={order.totalPrice} onSuccess={successPaymentHandler} />
                             )}
                         </ListGroup.Item>)}
+                        <div className="d-flex align-items-center justify-content-center mt-5 h-25">
+                            <Button variant="primary" onClick={() => navigate("/profile")}>view all orders</Button>
+                        </div>
                     </Col>
                 </Row>
             </>

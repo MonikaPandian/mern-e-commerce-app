@@ -8,7 +8,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { listProductDetails } from '../actions/productActions';
 import Loader from '../components/shared/Loader';
 import Message from '../components/shared/Message';
-import { addToCart } from '../actions/cartActions';
+import { addToCart, addToWishlist } from '../actions/cartActions';
+import toast, { Toaster } from 'react-hot-toast';
 
 const ProductDetailsPage = () => {
     const navigate = useNavigate();
@@ -25,6 +26,11 @@ const ProductDetailsPage = () => {
     const addToCartHandler = (e) => {
         dispatch(addToCart(id, qty));
         navigate("/cart");
+    }
+
+    const addToWishlistHandler = (e) => {
+        dispatch(addToWishlist(id, qty));
+        toast.success('Product added to wishlist')
     }
 
     return (
@@ -67,13 +73,17 @@ const ProductDetailsPage = () => {
                                         </ListGroupItem>
                                     )
                                 }
-                                <ListGroupItem>
+                                <ListGroupItem className='d-flex gap-3'>
                                     <Button className="btn" type="button"
                                         disabled={product.countInStock === 0} onClick={addToCartHandler}>Add to cart</Button>
+                                    <Button className="btn-info" type="button"
+                                        disabled={product.countInStock === 0} onClick={addToWishlistHandler}><i className="fa-solid fa-heart"></i>&nbsp;&nbsp;Add to wishlist</Button>
                                 </ListGroupItem>
                             </ListGroup>
                         </Col>
                     </Row>
+                    <Toaster position="top-center"
+                        reverseOrder={false} />
                 </div>
             }
         </>
