@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Row, Col, Button, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from '../components/shared/Loader';
@@ -9,25 +9,28 @@ import FormContainer from '../components/shared/FormContainer';
 import { useState } from 'react';
 
 const LoginPage = () => {
+    const navigate = useNavigate();
+    const { search } = useLocation();
+    const redirectInUrl = new URLSearchParams(search).get('redirect');
+    const redirect = redirectInUrl ? redirectInUrl : '/';
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState('');
-    const navigate = useNavigate();
 
     const dispatch = useDispatch();
     const userLogin = useSelector((state) => state.userLogin)
     const { loading, error, userInfo } = userLogin
-
-    useEffect(() => {
-        if (userInfo) {
-            navigate('/')
-        }
-    }, [userInfo, navigate])
 
     const submitHandler = (e) => {
         e.preventDefault();
         //dispatch
         dispatch(login(email, password));
     }
+
+    useEffect(() => {
+        if (userInfo) {
+            navigate(redirect);
+        }
+    }, [navigate, redirect, userInfo]);
 
     return (
         <>

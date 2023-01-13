@@ -15,7 +15,7 @@ const CartPage = () => {
     }
 
     const checkOut = () => {
-        navigate('/shipping');
+        navigate('/login?redirect=/shipping');
     }
 
     let cartItemsNumber = cartItems.reduce((acc, item) => acc + Number(item.qty), 0)

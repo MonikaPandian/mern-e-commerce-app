@@ -39,11 +39,8 @@ const PlaceOrderPage = () => {
         if (success) {
             navigate(`/order/${order._id}`)
         }
-        if (error) {
-            navigate("/login")
-        }
         //eslint-disable-next-line
-    }, [success, navigate, error])
+    }, [success, navigate])
 
     return (
         <>
