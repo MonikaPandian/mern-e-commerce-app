@@ -27,7 +27,7 @@ const Wishlist = () => {
                     <h3>Wishlist</h3>
                     {
                         wishlist.length === 0 ? (
-                            <Alert>Your wishlist is empty !! <Link to="/">start shopping</Link></Alert>
+                            <Alert variant="info">Your wishlist is empty !! <Link to="/">start shopping</Link></Alert>
                         ) : (<ListGroup variant="flush">
                             {wishlist.map((item) => (
                                 <ListGroupItem key={item.productId}>
@@ -57,7 +57,7 @@ const Wishlist = () => {
                                                 variant="primary" className='mt-2'
                                                 onClick={() => addToCartHandler(item.productId, qty)}
                                             >
-                                                Move to Cart
+                                                Add to Cart
                                             </Button>
                                             <Button
                                                 type="button"

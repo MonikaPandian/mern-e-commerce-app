@@ -27,7 +27,7 @@ const MyOrdersPage = () => {
         <Row className='d-flex justify-content-center'>
             <Col md={9}>
                 <h1 className='d-flex justify-content-center'>MY ORDERS</h1>
-                {
+                {orders.length === 0 ? <Alert variant="info">Your Order list is empty!!</Alert> :
                     loadingOrders ? <Loader /> : errorOrders ? <Alert variant="danger">{errorOrders}</Alert> : (
                         <Table striped bordered hover responsive className="table-sm text-center mt-3">
                             <thead>

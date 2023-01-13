@@ -1,4 +1,4 @@
-import { CART_ADD_ITEM, CART_REMOVE_ITEM, CART_SAVE_PAYMENT_METHOD, CART_SAVE_SHIPPING_ADDRESS, WISHLIST_ADD_ITEM, WISHLIST_REMOVE_ITEM } from "../constants/cartConstants";
+import { CART_ADD_ITEM, CART_REMOVE_ITEM, CART_RESET, CART_SAVE_PAYMENT_METHOD, CART_SAVE_SHIPPING_ADDRESS, WISHLIST_ADD_ITEM, WISHLIST_REMOVE_ITEM } from "../constants/cartConstants";
 
 export const cartReducer = (state = { cartItems: [], wishlist: [] }, action) => {
     switch (action.type) {
@@ -22,9 +22,7 @@ export const cartReducer = (state = { cartItems: [], wishlist: [] }, action) => 
             };
         case WISHLIST_ADD_ITEM:
             const prod = action.payload
-            console.log(prod)
             let existProd = state.wishlist.find(x => x.productId === prod.productId)
-            console.log(existProd)
             if (existProd) {
                 return {
                     ...state,
@@ -47,6 +45,8 @@ export const cartReducer = (state = { cartItems: [], wishlist: [] }, action) => 
                 ...state,
                 paymentMethod: action.payload,
             }
+        case CART_RESET:
+            return { ...state, cartItems: [] }
         default:
             return state;
     }

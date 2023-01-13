@@ -5,6 +5,8 @@ const productRoutes = require('./routes/productsRoute');
 const { errorHandler } = require('./middlewares/errorMiddleware');
 const userRoutes = require('./routes/usersRoute');
 const orderRoutes = require('./routes/orderRoute');
+const path = require('path');
+const cors = require('cors');
 
 //dotenv config
 dotenv.config();
@@ -15,10 +17,7 @@ const app = express();
 
 //middleware bodyparser
 app.use(express.json());
-
-app.get('/', (req, res) => {
-    res.send('<h1>Welcome to Node server for E-commerce app</h1>');
-})
+app.use(cors());
 
 app.use('/api', productRoutes);
 app.use('/api/users', userRoutes);
@@ -26,6 +25,17 @@ app.use('/api/orders', orderRoutes);
 app.get('/api/config/paypal', (req, res) => {
     res.send(process.env.PAYPAL_CLIENT_ID);
 })
+
+// -------------Deployment--------------- //
+const _dirname = path.resolve();
+const buildPath = path.join(_dirname, "/frontend/build");
+
+app.use(express.static(buildPath))
+app.get("/*", function (req, res) {
+
+    res.sendFile(path.join(__dirname, "frontend", "build", "index.html"))
+})
+// -------------Deployment--------------- //
 
 app.use(errorHandler);
 

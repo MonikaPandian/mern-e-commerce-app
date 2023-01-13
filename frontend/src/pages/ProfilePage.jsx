@@ -34,8 +34,8 @@ const ProfilePage = () => {
             if (!user.name) {
                 dispatch(getUserDetails("profile"));
             } else {
-                setName(user.name);
-                setEmail(user.email);
+                setName(userInfo.name);
+                setEmail(userInfo.email);
             }
         }
     }, [userInfo, navigate, dispatch, user])
@@ -49,6 +49,7 @@ const ProfilePage = () => {
         else {
             dispatch(updateUserProfile({ id: user._id, name, email, password }))
         }
+
     }
 
     return (

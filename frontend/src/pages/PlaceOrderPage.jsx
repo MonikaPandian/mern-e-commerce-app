@@ -7,8 +7,9 @@ import Message from "../components/shared/Message";
 import CheckOutStep from "../components/shared/CheckoutStep";
 
 const PlaceOrderPage = () => {
-    const cart = useSelector((state) => state.cart)
     const dispatch = useDispatch();
+    const cart = useSelector((state) => state.cart)
+
     const orderCreate = useSelector((state) => state.orderCreate)
     const { order, success, error } = orderCreate
     const navigate = useNavigate();
@@ -38,8 +39,8 @@ const PlaceOrderPage = () => {
         if (success) {
             navigate(`/order/${order._id}`)
         }
-        // eslint-disable-next-line
-    }, [navigate, success])
+        //eslint-disable-next-line
+    }, [success, navigate])
 
     return (
         <>
