@@ -27,12 +27,11 @@ app.get('/api/config/paypal', (req, res) => {
 })
 
 // -------------Deployment--------------- //
-const _dirname = path.resolve();
-const buildPath = path.join(_dirname, "/frontend/build");
+__dirname = path.resolve();
+const buildPath = path.join(__dirname, "/frontend/build");
 
 app.use(express.static(buildPath))
-app.get("/*", function (req, res) {
-
+app.get("*", function (req, res) {
     res.sendFile(path.join(__dirname, "frontend", "build", "index.html"))
 })
 // -------------Deployment--------------- //
