@@ -27,7 +27,7 @@ const CartPage = () => {
                     <h3>Shopping cart</h3>
                     {
                         cartItems.length === 0 ? (
-                            <Alert>Your cart is empty !! <Link to="/">start shopping</Link></Alert>
+                            <Alert variant="info">Your cart is empty !! <Link to="/">start shopping</Link></Alert>
                         ) : (<ListGroup variant="flush">
                             {cartItems.map((item) => (
                                 <ListGroupItem key={item.productId}>

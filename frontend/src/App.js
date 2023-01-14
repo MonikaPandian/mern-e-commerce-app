@@ -10,7 +10,7 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import ProfilePage from './pages/ProfilePage';
 import ShippingPage from './pages/ShippingPage';
-import PaymentPage from './pages/PaymentPage';
+import PaymentMethodPage from './pages/PaymentMethodPage';
 import PlaceOrderPage from './pages/PlaceOrderPage';
 import OrderPage from './pages/OrderPage';
 import HomeEssentialProducts from './pages/HomeEssentialProducts';
@@ -37,7 +37,7 @@ function App() {
             <Route path="/beauty-products" element={<BeautyProducts />} />
             <Route path="/headphones" element={<HeadphoneProducts />} />
             <Route path="/cart" element={<CartPage />} />
-            <Route path="/payment" element={<PaymentPage />} />
+            <Route path="/payment" element={<PaymentMethodPage />} />
             <Route path="/wishlist" element={<Wishlist />} />
             <Route path="/order/:orderId" element={<OrderPage />} />
             <Route path="/my-orders" element={<MyOrdersPage />} />

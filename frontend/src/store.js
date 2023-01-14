@@ -14,6 +14,8 @@ const cartItemsFromStorage = localStorage.getItem('cartItems') ? JSON.parse(loca
 
 const wishListItemsFromStorage = localStorage.getItem('wishlist') ? JSON.parse(localStorage.getItem('wishlist')) : []
 
+const paymentMethodFromStorage = localStorage.getItem('PaymentMethod') ? JSON.parse(localStorage.getItem('PaymentMethod')) : ""
+
 const reducer = combineReducers({
     productList: productListReducer,
     productDetails: productDetailsReducer,
@@ -32,6 +34,7 @@ const initialState = {
     cart: {
         cartItems: cartItemsFromStorage,
         shippingAddress: shippingAddressFromStorage,
+        paymentMethod: paymentMethodFromStorage,
         wishlist: wishListItemsFromStorage,
     },
     userLogin: {

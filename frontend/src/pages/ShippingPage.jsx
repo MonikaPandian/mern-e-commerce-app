@@ -29,6 +29,7 @@ const ShippingPage = () => {
         <>
             <FormContainer>
                 <CheckoutStep step1 step2 />
+                <h1>Shipping Address</h1>
                 <Form onSubmit={submitHandler}>
                     <Form.Group controlId="address" className='mt-3'>
                         <Form.Label>Address</Form.Label>
