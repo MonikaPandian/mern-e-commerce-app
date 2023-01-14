@@ -4,10 +4,13 @@ import { LinkContainer } from "react-router-bootstrap";
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from "../actions/userActions";
 import { useNavigate } from "react-router-dom";
+import "../App.css"
 
 const Header = () => {
     const userLogin = useSelector((state) => state.userLogin)
     const { userInfo } = userLogin
+    const cart = useSelector((state) => state.cart)
+    const { cartItems } = cart;
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -31,11 +34,13 @@ const Header = () => {
                             navbarScroll
                         > <LinkContainer to="/">
                                 <Nav.Link>
-                                    <i className="fa-solid fa-house"></i>&nbsp;&nbsp;HOME</Nav.Link>
+                                    <i className="fa-solid fa-house"></i>&nbsp;&nbsp;HOME
+                                </Nav.Link>
                             </LinkContainer>
                             <LinkContainer to="/cart">
                                 <Nav.Link>
-                                    <i className="fa-solid fa-cart-shopping"></i>&nbsp;&nbsp;CART</Nav.Link>
+                                    <i className="fa-solid fa-cart-shopping"></i><span className="badge">{cartItems.length}</span>CART
+                                </Nav.Link>
                             </LinkContainer>
                             {userInfo ? (
                                 <NavDropdown title={userInfo.name} id="username">
