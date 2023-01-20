@@ -9,7 +9,7 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "build": "npm install && cd ../frontend && npm install --force && npm run build",
+    "build": "npm install && cd frontend && npm install --force && npm run build",
     "data:import": "node backend/seeder.js",
     "data:destroy": "node backend/seeder.js -d",
     "test": "echo \"Error: no test specified\" && exit 1"
