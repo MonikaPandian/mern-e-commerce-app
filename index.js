@@ -1,10 +1,10 @@
 const express = require('express');
 const dotenv = require('dotenv');
-const connectDB = require('./config/config');
-const productRoutes = require('./routes/productsRoute');
-const { errorHandler } = require('./middlewares/errorMiddleware');
-const userRoutes = require('./routes/usersRoute');
-const orderRoutes = require('./routes/orderRoute');
+const connectDB = require('./backend/config/config');
+const productRoutes = require('./backend/routes/productsRoute');
+const { errorHandler } = require('./backend/middlewares/errorMiddleware');
+const userRoutes = require('./backend/routes/usersRoute');
+const orderRoutes = require('./backend/routes/orderRoute');
 const path = require('path');
 const cors = require('cors');
 
