@@ -47,12 +47,19 @@ const LoginPage = () => {
                         <Form.Label>Password</Form.Label>
                         <Form.Control type="password" placeholder="Enter password" value={password} onChange={(e) => setPassword(e.target.value)}></Form.Control>
                     </Form.Group>
-                    <Button type="submit" variant="primary" className='mt-3'>SIGN IN</Button><br />
-                    <Button type="button" variant="info" className='mt-3' onClick={() => { setEmail("guest@example.com"); setPassword("123456") }}>Get guest user credentials</Button>
+                    <Form.Group controlId="forgot-password-link" className='mt-3' align="right">
+                        <Row className='mt-3' onClick={() => navigate("/forgot-password")}>
+                            <Col>
+                                <Link to="/register"> Forgot Password ?</Link>
+                            </Col>
+                        </Row>
+                    </Form.Group>
+                    <Button type="submit" variant="primary" className='mt-3 w-50' >SIGN IN</Button><br />
+                    <Button type="button" variant="info" className='mt-3 w-50' onClick={() => { setEmail("guest@example.com"); setPassword("123456") }}>Get guest user credentials</Button>
                 </Form>
                 <Row className='mt-3'>
                     <Col>
-                        New Customer ?&nbsp;
+                        New User ?&nbsp;
                         <Link to="/register">Register</Link>
                     </Col>
                 </Row>

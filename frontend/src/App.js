@@ -18,6 +18,8 @@ import BeautyProducts from './pages/BeautyProducts';
 import HeadphoneProducts from './pages/HeadphoneProducts';
 import MyOrdersPage from './pages/MyOrdersPage';
 import Wishlist from './pages/Wishlist';
+import ForgotPasswordPage from './pages/ForgotPasswordPage';
+import ResetPasswordPage from './pages/ResetPasswordPage';
 
 function App() {
   return (
@@ -29,6 +31,8 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
+            <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+            <Route path="/reset-password/:id/:token" element={<ResetPasswordPage />} />
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/shipping" element={<ShippingPage />} />
             <Route path="/place-order" element={<PlaceOrderPage />} />
